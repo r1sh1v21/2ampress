@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   2 AM Press — "Last Call" design tokens (Tailwind v4 is CSS-first; tokens live
+   here in @theme rather than tailwind.config.js — see DECISIONS.md).
+---------------------------------------------------------------------------- */
+@theme {
+  /* Palette — the entire system. No colors outside this family. */
+  --color-ink: #161019; /* primary background, near-black plum */
+  --color-ink-soft: #1e1622; /* subtle separation above ink */
+  --color-plum: #3d2a41; /* secondary surface: cards, borders, hover */
+  --color-plum-soft: #6b5470; /* muted text on dark */
+  --color-rose: #c77b8b; /* ACCENT ONLY — tiny highlights, <5% area */
+  --color-bone: #ebdbe0; /* primary text + light surfaces, warm off-white */
+
+  --font-display: var(--font-display), Georgia, serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+}
+
+/* Default + only mode is dark. The brand lives at night. */
+html {
+  background: var(--color-ink);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* When Lenis is active it drives scroll; keep native smooth off to avoid fights. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+::selection {
+  background: var(--color-rose);
+  color: var(--color-ink);
+}
+
+/* Slim, on-brand scrollbar (desktop). */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-plum);
+  border-radius: 99px;
+}
+
+/* Display type wants tight, intentional tracking. */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+/* Tiny mono kicker/label idiom. */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-plum-soft);
+}
+
+/* Film-grain overlay texture (applied by <Grain />). */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
