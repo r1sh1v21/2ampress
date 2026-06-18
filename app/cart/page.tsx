@@ -24,7 +24,7 @@ export default function CartPage() {
           Nothing in here yet. Go find the book for the night you&apos;re having.
         </p>
         <Link
-          href="/shop"
+          href="/archive"
           className="mt-9 rounded-full bg-bone px-8 py-3.5 font-medium text-ink transition-colors hover:bg-rose"
         >
           Browse the shelf

@@ -3,10 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Hard clip-wipe reveal — the element is unmasked from its bottom edge as it
- * enters view (see .wipe in globals.css). Deliberately NOT a fade-up; that
- * soft rise-and-fade is the universal AI-site tell. Under reduced motion the
- * CSS disables the clip entirely.
+ * Premium reveal — a slow, short rise + fade as the element enters view (see
+ * .rise in globals.css). Restrained on purpose: small distance, long easing.
+ * Reduced motion shows content immediately.
  */
 export default function Reveal({
   children,
@@ -30,7 +29,7 @@ export default function Reveal({
           io.disconnect();
         }
       },
-      { rootMargin: "-12% 0px -12% 0px" }
+      { rootMargin: "-8% 0px -8% 0px" }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -39,7 +38,7 @@ export default function Reveal({
   return (
     <div
       ref={ref}
-      className={`wipe ${shown ? "is-in" : ""} ${className}`}
+      className={`rise ${shown ? "is-in" : ""} ${className}`}
       style={{ transitionDelay: `${delay}s` }}
     >
       {children}

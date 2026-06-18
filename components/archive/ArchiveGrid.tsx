@@ -6,11 +6,10 @@ import { books } from "@/lib/books";
 import BookCard from "@/components/BookCard";
 
 /**
- * Gallery catalog with a browse-by-mood filter. Layout is intentionally
- * uneven — the flagship spans wider, the rest fall into a varied masonry-ish
- * grid — so it never reads as a row of identical cards.
+ * Archive grid with a quiet browse-by-mood filter. The flagship spans wider so
+ * the layout breathes unevenly rather than reading as a uniform grid.
  */
-export default function ShopGrid() {
+export default function ArchiveGrid() {
   const moods = useMemo(
     () => ["all", ...Array.from(new Set(books.map((b) => b.mood)))],
     []
@@ -21,15 +20,14 @@ export default function ShopGrid() {
 
   return (
     <div>
-      <div className="mb-12 flex flex-wrap gap-2">
+      <div className="mb-14 flex flex-wrap gap-x-6 gap-y-3">
         {moods.map((m) => (
           <button
             key={m}
             onClick={() => setMood(m)}
-            className={`rounded-full border px-4 py-1.5 font-mono text-xs uppercase tracking-widest transition-colors ${
-              mood === m
-                ? "border-bone bg-bone text-ink"
-                : "border-plum/60 text-bone/60 hover:border-bone hover:text-bone"
+            data-active={mood === m}
+            className={`link-underline font-mono text-xs uppercase tracking-[0.16em] transition-colors ${
+              mood === m ? "text-bone" : "text-fog hover:text-bone"
             }`}
           >
             {m}
@@ -37,16 +35,19 @@ export default function ShopGrid() {
         ))}
       </div>
 
-      <motion.div layout className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div
+        layout
+        className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
+      >
         <AnimatePresence mode="popLayout">
           {shown.map((b) => (
             <motion.div
               key={b.slug}
               layout
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className={b.flagship ? "sm:col-span-2 lg:col-span-2" : ""}
             >
               <BookCard book={b} featured={b.flagship} />

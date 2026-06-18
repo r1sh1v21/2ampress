@@ -1,30 +1,33 @@
 import type { Metadata } from "next";
-import { Anton, Space_Grotesk, Space_Mono } from "next/font/google";
+import { Fraunces, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Grain from "@/components/Grain";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/CartContext";
+import { AuthProvider } from "@/components/AuthContext";
 
-// Display: ultra-condensed heavy grotesque — protest-poster scale, brutal.
-const display = Anton({
-  weight: "400",
+// Display: a refined high-contrast serif. Light weights, optical sizing — quiet
+// and expensive. Used at large sizes, sentence case.
+const display = Fraunces({
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
-// Reader long-form body: a slightly off, characterful humanist sans.
-const sans = Space_Grotesk({
+// Body: a clean, premium neutral grotesque.
+const sans = Hanken_Grotesk({
+  weight: ["300", "400", "500"],
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
 });
 
-// Everything else (body + labels + timestamps): monospace. Terminal/zine.
-const mono = Space_Mono({
-  weight: ["400", "700"],
+// Mono accent: labels, prices, numbers, timestamps — the archive-catalog detail.
+const mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
@@ -45,13 +48,15 @@ export default function RootLayout({
       className={`${display.variable} ${sans.variable} ${mono.variable}`}
     >
       <body>
-        <CartProvider>
-          <SmoothScroll />
-          <Grain />
-          <Nav />
-          <main>{children}</main>
-          <Footer />
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <SmoothScroll />
+            <Grain />
+            <Nav />
+            <main>{children}</main>
+            <Footer />
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );
