@@ -205,7 +205,7 @@ export default function Reader({
                 {entry.title}
               </h1>
               <p
-                className="mx-auto mt-8 text-bone/70"
+                className="font-read mx-auto mt-8 text-bone/70"
                 style={{
                   fontSize: `calc(${size} * 1.15rem)`,
                   lineHeight: 1.75,

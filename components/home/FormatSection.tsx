@@ -41,11 +41,11 @@ export default function FormatSection() {
         {STEPS.map((s) => (
           <div
             key={s.n}
-            className="w-[78vw] shrink-0 rounded-xl border border-plum/60 bg-plum/20 p-8 sm:w-[360px]"
+            className="w-[78vw] shrink-0 border border-plum bg-coal p-8 sm:w-[360px]"
           >
             <span className="font-mono text-sm text-rose">{s.n}</span>
-            <h3 className="font-display mt-6 text-3xl">{s.t}</h3>
-            <p className="mt-3 text-bone/60">{s.b}</p>
+            <h3 className="font-display mt-6 text-4xl">{s.t}</h3>
+            <p className="mt-3 text-sm text-bone/55">{s.b}</p>
           </div>
         ))}
       </motion.div>

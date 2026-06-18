@@ -5,32 +5,31 @@ import Reveal from "@/components/Reveal";
 import { flagship } from "@/lib/books";
 
 /**
- * Section 5 — closing CTA. Full-bleed, confident, a single line and a button.
+ * Closing slab — full-bleed black, one giant line, a square ember CTA.
  */
 export default function ClosingCTA() {
   return (
-    <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden px-5 py-32 text-center sm:px-8">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 60%, rgba(61,42,65,0.5) 0%, rgba(22,16,25,0) 60%)",
-        }}
-      />
-      <Reveal>
-        <p className="kicker mb-8">02:00</p>
-        <h2 className="font-display mx-auto max-w-4xl text-[clamp(2.6rem,8vw,6.5rem)] leading-[0.98]">
-          Still awake? <span className="italic text-rose">Start</span> with one
-          thing.
-        </h2>
-        <Link
-          href={`/read/${flagship.slug}`}
-          className="mt-12 inline-block rounded-full bg-bone px-9 py-4 font-medium text-ink transition-colors hover:bg-rose"
-        >
-          Open the book
-        </Link>
-      </Reveal>
+    <section className="relative mt-10 border-t border-plum px-4 py-[16vh] sm:px-6">
+      <div className="mx-auto max-w-[1300px]">
+        <Reveal>
+          <span className="kicker">02:00 — last call</span>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="font-display mt-6 text-[clamp(3rem,14vw,12rem)]">
+            still awake?
+            <br />
+            start with <span className="text-rose">one.</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <Link
+            href={`/read/${flagship.slug}`}
+            className="mt-12 inline-block bg-rose px-9 py-5 text-sm font-bold uppercase tracking-wider text-ink transition-colors hover:bg-bone"
+          >
+            Open the book →
+          </Link>
+        </Reveal>
+      </div>
     </section>
   );
 }

@@ -27,7 +27,7 @@ export const books: Book[] = [
       "You don't need a five-year plan at 2am. You need the next ten minutes. This is one hundred small, doable things — not affirmations, not a glow-up — just honest moves from someone who's been awake at the same hour you are. Read one. Do it. Come back tomorrow.",
     price: 9,
     mood: "heartbreak",
-    cover: { base: "#3d2a41", accent: "#c77b8b", glyph: "100" },
+    cover: { base: "#0e0e0e", accent: "#ff5d4b", glyph: "100" },
     count: 100,
     flagship: true,
   },
@@ -39,7 +39,7 @@ export const books: Book[] = [
       "Alone is a skill before it's a feeling. Two hundred ways to spend an evening with yourself that don't end in a doom-scroll — small adventures, quiet rituals, and the kind of nights you'll secretly start to protect.",
     price: 11,
     mood: "solitude",
-    cover: { base: "#1e1622", accent: "#c77b8b", glyph: "200" },
+    cover: { base: "#070707", accent: "#ededea", glyph: "200" },
     count: 200,
   },
   {
@@ -50,7 +50,7 @@ export const books: Book[] = [
       "Being memorable isn't loud. It's a hundred small, specific moves — how you listen, when you text back, what you notice — that make people keep your name in their mouth long after you've left the room.",
     price: 10,
     mood: "magnetism",
-    cover: { base: "#3d2a41", accent: "#ebdbe0", glyph: "100" },
+    cover: { base: "#121212", accent: "#ff5d4b", glyph: "100" },
     count: 100,
   },
   {
@@ -61,7 +61,7 @@ export const books: Book[] = [
       "Thirty actual dates — for new people, old loves, or just yourself — designed to get past the small talk and into the part that matters. Print one out. Surprise someone. Be the person who plans.",
     price: 8,
     mood: "romance",
-    cover: { base: "#1e1622", accent: "#c77b8b", glyph: "30" },
+    cover: { base: "#0a0a0a", accent: "#ededea", glyph: "30" },
     count: 30,
   },
   {
@@ -72,7 +72,7 @@ export const books: Book[] = [
       "Fifty small, unglamorous ways to want your phone a little less — built for people who've tried 'just delete the app' and know it doesn't work like that. Gentle, specific, and a little funny about how hard this actually is.",
     price: 7,
     mood: "reset",
-    cover: { base: "#3d2a41", accent: "#6b5470", glyph: "50" },
+    cover: { base: "#0e0e0e", accent: "#6c6c6c", glyph: "50" },
     count: 50,
   },
   {
@@ -83,7 +83,7 @@ export const books: Book[] = [
       "One hundred questions to sit with before you reply to the message you've already typed three times. Not rules — just a friend grabbing your wrist for a second so you send the thing you actually mean.",
     price: 9,
     mood: "clarity",
-    cover: { base: "#1e1622", accent: "#c77b8b", glyph: "100" },
+    cover: { base: "#060606", accent: "#ff5d4b", glyph: "100" },
     count: 100,
   },
 ];

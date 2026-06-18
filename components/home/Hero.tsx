@@ -6,104 +6,86 @@ import FloatingBook from "@/components/FloatingBook";
 import { flagship } from "@/lib/books";
 
 /**
- * Full-viewport hero. Asymmetric: the floating book sits right-of-center, copy
- * runs down the left. A dim radial glow sits behind the book (palette only).
+ * Brutalist hero. Black canvas, hard-left giant condensed type that bleeds the
+ * edge, an index-style metadata row at the foot, and the book floating off to
+ * the right. No centered column, no soft fade choreography — the title is
+ * unmasked with a single mechanical clip wipe.
  */
 export default function Hero() {
   const reduce = useReducedMotion();
 
+  const line = (text: string, accent = false) => (
+    <span className="block overflow-hidden">
+      <motion.span
+        initial={reduce ? false : { y: "110%" }}
+        animate={{ y: "0%" }}
+        transition={{ duration: 0.7, ease: [0.7, 0, 0.2, 1] }}
+        className={`block ${accent ? "text-rose" : ""}`}
+      >
+        {text}
+      </motion.span>
+    </span>
+  );
+
   return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden px-5 pt-24 sm:px-8">
-      {/* dim ambient glow behind the book */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-[8%] top-1/2 -z-10 h-[70vh] w-[70vh] -translate-y-1/2 rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(61,42,65,0.55) 0%, rgba(22,16,25,0) 65%)",
-        }}
-      />
-
-      <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-        {/* copy column */}
-        <div className="order-2 max-w-xl lg:order-1">
-          <motion.p
-            initial={reduce ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="kicker"
-          >
-            02:00 — you&apos;re still awake.
-          </motion.p>
-
-          <motion.h1
-            initial={reduce ? false : { opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display mt-5 text-[clamp(3rem,11vw,8.5rem)] leading-[0.9]"
-          >
-            100 things
-            <br />
-            to do after
-            <br />a <span className="italic text-rose">breakup</span>.
-          </motion.h1>
-
-          <motion.p
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-7 max-w-md text-lg text-bone/65"
-          >
-            You don&apos;t need a five-year plan at 2am. You need the next ten
-            minutes. One small, doable thing at a time — until the days start to
-            get lighter.
-          </motion.p>
-
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-9 flex flex-wrap items-center gap-5"
-          >
-            <Link
-              href={`/read/${flagship.slug}`}
-              className="group relative overflow-hidden rounded-full border border-bone px-7 py-3 text-sm font-medium text-ink"
-            >
-              <span className="absolute inset-0 bg-bone transition-transform duration-300" />
-              <span className="absolute inset-0 origin-left scale-x-0 bg-rose transition-transform duration-300 group-hover:scale-x-100" />
-              <span className="relative">Start reading</span>
-            </Link>
-            <Link
-              href={`/book/${flagship.slug}`}
-              className="text-sm text-bone/70 underline-offset-4 transition-colors hover:text-bone hover:underline"
-            >
-              Get the book — ${flagship.price}
-            </Link>
-          </motion.div>
+    <section className="relative min-h-[100svh] overflow-hidden px-4 pt-28 sm:px-6">
+      {/* book — floats top-right, partially behind the type */}
+      <div className="pointer-events-none absolute right-[2%] top-[14%] z-0 hidden opacity-90 lg:block xl:right-[6%]">
+        <div className="pointer-events-auto">
+          <FloatingBook book={flagship} size={260} />
         </div>
-
-        {/* book column */}
-        <motion.div
-          initial={reduce ? false : { opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="order-1 flex justify-center lg:order-2 lg:justify-end"
-        >
-          <FloatingBook book={flagship} size={300} />
-        </motion.div>
       </div>
 
-      {/* scroll cue */}
-      {!reduce && (
-        <motion.div
-          aria-hidden
-          className="absolute bottom-7 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 8, 0], opacity: [0.4, 0.8, 0.4] }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <span className="kicker">scroll</span>
-        </motion.div>
-      )}
+      {/* top index bar */}
+      <div className="relative z-10 flex items-center justify-between border-b border-plum pb-3">
+        <span className="kicker">№ 001 — the flagship</span>
+        <span className="kicker">02:00 // still awake</span>
+      </div>
+
+      {/* the slab */}
+      <h1 className="font-display relative z-10 mt-[8vh] text-[clamp(3.5rem,16vw,13rem)]">
+        {line("100 things")}
+        {line("to do after")}
+        {line("a breakup", true)}
+      </h1>
+
+      <div className="relative z-10 mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <p className="max-w-md text-sm leading-relaxed text-bone/60">
+          You don&apos;t need a five-year plan at 2am. You need the next ten
+          minutes. One small, doable thing at a time — until the days start to
+          get lighter.
+        </p>
+
+        <div className="flex flex-wrap gap-px bg-plum">
+          <Link
+            href={`/read/${flagship.slug}`}
+            className="bg-rose px-7 py-4 text-sm font-bold uppercase tracking-wider text-ink transition-colors hover:bg-bone"
+          >
+            Start reading →
+          </Link>
+          <Link
+            href={`/book/${flagship.slug}`}
+            className="bg-coal px-7 py-4 text-sm font-bold uppercase tracking-wider text-bone transition-colors hover:bg-ink-soft"
+          >
+            Get it / ${flagship.price}
+          </Link>
+        </div>
+      </div>
+
+      {/* foot metadata index */}
+      <dl className="relative z-10 mt-[8vh] grid grid-cols-2 border-t border-plum text-xs sm:grid-cols-4">
+        {[
+          ["format", "one thing / page"],
+          ["pages", "100 total"],
+          ["sample", "10 free"],
+          ["price", `$${flagship.price}`],
+        ].map(([k, v]) => (
+          <div key={k} className="border-r border-plum px-1 py-4 last:border-r-0">
+            <dt className="kicker mb-2">{k}</dt>
+            <dd className="font-mono text-bone/80">{v}</dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }

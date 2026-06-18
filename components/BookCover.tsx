@@ -2,8 +2,9 @@ import type { Book } from "@/lib/books";
 
 /**
  * The front face of a book, drawn entirely in CSS (no image dependency).
- * Editorial layout: tiny mono imprint, a huge number, the title set in display
- * serif. Used as the face of <FloatingBook /> and inside <BookCard />.
+ * Brutalist layout: a hard imprint frame, a massive condensed number bleeding
+ * the cover, the title stamped at the foot. Used by <FloatingBook /> and
+ * <BookCard />.
  */
 export default function BookCover({
   book,
@@ -17,21 +18,21 @@ export default function BookCover({
     <div
       className={`relative flex h-full w-full flex-col justify-between overflow-hidden p-[8%] ${className}`}
       style={{
-        background: `linear-gradient(155deg, ${base} 0%, #161019 120%)`,
+        background: `linear-gradient(165deg, ${base} 0%, #000 130%)`,
         containerType: "inline-size",
       }}
     >
-      {/* faint imprint line */}
+      {/* hard imprint frame */}
       <div
-        className="absolute inset-[6%] rounded-[2px] border"
-        style={{ borderColor: "rgba(235,219,224,0.10)" }}
+        className="absolute inset-[5%] border"
+        style={{ borderColor: "rgba(237,237,234,0.16)" }}
         aria-hidden
       />
 
       <div className="relative flex items-center justify-between">
         <span
-          className="font-mono uppercase tracking-[0.25em]"
-          style={{ color: "rgba(235,219,224,0.55)", fontSize: "0.5rem" }}
+          className="font-mono uppercase tracking-[0.22em]"
+          style={{ color: "rgba(237,237,234,0.6)", fontSize: "0.5rem" }}
         >
           2 AM Press
         </span>
@@ -39,29 +40,35 @@ export default function BookCover({
           className="font-mono"
           style={{ color: accent, fontSize: "0.5rem" }}
         >
-          02:00
+          ●
         </span>
       </div>
 
+      {/* the number, bleeding huge */}
       <div
-        className="font-display leading-[0.8]"
-        style={{ color: accent, fontSize: "clamp(2.4rem, 9cqw, 6rem)" }}
+        className="font-display"
+        style={{
+          color: accent,
+          fontSize: "clamp(3rem, 16cqw, 9rem)",
+          lineHeight: 0.78,
+          letterSpacing: "-0.04em",
+        }}
       >
         {glyph}
       </div>
 
       <div className="relative">
+        <div className="mb-[5%] h-px w-full" style={{ background: "rgba(237,237,234,0.16)" }} aria-hidden />
         <div
-          className="font-display leading-[0.95]"
-          style={{ color: "#ebdbe0", fontSize: "clamp(0.8rem, 4.2cqw, 1.6rem)" }}
+          className="font-display"
+          style={{
+            color: "#ededea",
+            fontSize: "clamp(0.75rem, 4.6cqw, 1.7rem)",
+            lineHeight: 0.92,
+          }}
         >
           {book.title}
         </div>
-        <div
-          className="mt-[6%] h-px w-1/3"
-          style={{ background: accent }}
-          aria-hidden
-        />
       </div>
     </div>
   );

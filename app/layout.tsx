@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Anton, Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Grain from "@/components/Grain";
@@ -7,24 +7,24 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/CartContext";
 
-// Display: high-contrast literary serif — editorial, intimate, scales huge.
-const display = Instrument_Serif({
+// Display: ultra-condensed heavy grotesque — protest-poster scale, brutal.
+const display = Anton({
   weight: "400",
-  style: ["normal", "italic"],
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
-// Body: clean, warm sans.
-const sans = DM_Sans({
+// Reader long-form body: a slightly off, characterful humanist sans.
+const sans = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
 });
 
-// Mono accent: kickers, timestamps, "02:00", page numbers.
-const mono = JetBrains_Mono({
+// Everything else (body + labels + timestamps): monospace. Terminal/zine.
+const mono = Space_Mono({
+  weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",

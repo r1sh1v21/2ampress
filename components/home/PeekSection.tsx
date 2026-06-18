@@ -24,14 +24,14 @@ export default function PeekSection() {
       <div className="mt-14 grid gap-6 md:grid-cols-3">
         {samples.map((e, i) => (
           <Reveal key={e.number} delay={i * 0.08}>
-            <article className="flex h-full flex-col rounded-xl border border-plum/50 bg-ink-soft p-7">
+            <article className="flex h-full flex-col border border-plum bg-coal p-7">
               <span className="font-mono text-sm text-rose">
                 № {String(e.number).padStart(2, "0")}
               </span>
-              <h3 className="font-display mt-4 text-2xl leading-tight">
+              <h3 className="font-display mt-4 text-3xl leading-[0.9]">
                 {e.title}
               </h3>
-              <p className="mt-4 text-sm leading-relaxed text-bone/55">
+              <p className="font-read mt-4 text-sm leading-relaxed text-bone/55">
                 {e.body}
               </p>
             </article>

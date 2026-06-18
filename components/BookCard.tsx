@@ -27,7 +27,7 @@ export default function BookCard({
         style={{ perspective: 1000 }}
       >
         <div
-          className="overflow-hidden rounded-[4px] shadow-[0_24px_50px_-24px_rgba(0,0,0,0.8)] ring-1 ring-bone/5 transition-shadow duration-300 group-hover:shadow-[0_40px_70px_-28px_rgba(0,0,0,0.9)]"
+          className="overflow-hidden shadow-[0_24px_50px_-24px_rgba(0,0,0,0.9)] ring-1 ring-plum transition-shadow duration-300 group-hover:shadow-[0_40px_70px_-28px_rgba(0,0,0,1)]"
           style={{ aspectRatio: featured ? "3 / 4" : "2 / 3" }}
         >
           <BookCover book={book} />

@@ -1,37 +1,48 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
 /**
- * Reveal-on-enter wrapper. Weighty rise + fade as the element scrolls into
- * view. Under reduced motion it simply renders (no transform, instant).
+ * Hard clip-wipe reveal — the element is unmasked from its bottom edge as it
+ * enters view (see .wipe in globals.css). Deliberately NOT a fade-up; that
+ * soft rise-and-fade is the universal AI-site tell. Under reduced motion the
+ * CSS disables the clip entirely.
  */
 export default function Reveal({
   children,
   delay = 0,
-  y = 28,
   className = "",
-  once = true,
 }: {
   children: React.ReactNode;
   delay?: number;
-  y?: number;
   className?: string;
-  once?: boolean;
 }) {
-  const reduce = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const [shown, setShown] = useState(false);
 
-  if (reduce) return <div className={className}>{children}</div>;
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "-12% 0px -12% 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: "-12% 0px -12% 0px" }}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      ref={ref}
+      className={`wipe ${shown ? "is-in" : ""} ${className}`}
+      style={{ transitionDelay: `${delay}s` }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

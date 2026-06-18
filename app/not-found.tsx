@@ -7,7 +7,7 @@ export default function NotFound() {
       <h1 className="font-display text-[clamp(2.6rem,9vw,6rem)] leading-[0.95]">
         This page is up
         <br />
-        past its <span className="italic text-rose">bedtime.</span>
+        past its <span className="text-rose">bedtime.</span>
       </h1>
       <p className="mt-6 max-w-sm text-bone/55">
         Whatever you were looking for isn&apos;t here — or it&apos;s asleep.

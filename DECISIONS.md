@@ -2,6 +2,30 @@
 
 Taste-driven calls made while building, plus how to run the project.
 
+## v2 — "Lights Out" redesign (anti-AI pass)
+
+The first pass read as the default "AI editorial" look (serif + plum +
+fade-up-on-scroll). Deliberately broken in v2:
+
+- **Palette is black now, not purple.** `ink` is near-pure black (#080808).
+  The old plum tokens are kept by name but recolored to a NEUTRAL coal
+  (#242424) used only for hairlines/surfaces — no purple as a theme color. The
+  accent flipped from soft rose-pink to a hot **ember red-orange** (#ff5d4b),
+  still used sparingly (one word per heading, CTAs, active states).
+- **Type is brutalist.** Display is **Anton** — an ultra-condensed heavy
+  grotesque, set BIG and uppercase (protest-poster scale). Body + all UI is
+  **Space Mono** (terminal/zine feel, not the universal AI sans). The reader's
+  long-form text uses **Space Grotesk** (`.font-read`) so paragraphs stay
+  comfortable.
+- **Scroll motion is hard, not soft.** The fade-up `Reveal` and the
+  word-brighten `ScrollText` (both AI tells) are gone. `Reveal` now does a
+  mechanical **clip-wipe** (unmask from the bottom edge). Added a `Marquee`
+  ticker (infinite horizontal banner) as a recurring zine device. The hero
+  title is unmasked with a single overflow-clip slide, not a fade.
+- **Layout is editorial/ledger.** Hard-left giant type that bleeds the edge,
+  index/metadata rows with hairline dividers, square (un-rounded) cards and
+  square CTAs. No centered hero column, no rounded glass cards.
+
 ## How to run
 
 ```bash

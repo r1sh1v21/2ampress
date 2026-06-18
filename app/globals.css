@@ -1,24 +1,26 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------------------------------
-   2 AM Press — "Last Call" design tokens (Tailwind v4 is CSS-first; tokens live
-   here in @theme rather than tailwind.config.js — see DECISIONS.md).
+   2 AM Press — "Lights Out" tokens. Near-pure black canvas, brutalist type,
+   one warm rose accent. Plum is demoted to a neutral coal (borders/surfaces);
+   the brand is black now, not purple. (Tailwind v4 is CSS-first — see DECISIONS.)
 ---------------------------------------------------------------------------- */
 @theme {
-  /* Palette — the entire system. No colors outside this family. */
-  --color-ink: #161019; /* primary background, near-black plum */
-  --color-ink-soft: #1e1622; /* subtle separation above ink */
-  --color-plum: #3d2a41; /* secondary surface: cards, borders, hover */
-  --color-plum-soft: #6b5470; /* muted text on dark */
-  --color-rose: #c77b8b; /* ACCENT ONLY — tiny highlights, <5% area */
-  --color-bone: #ebdbe0; /* primary text + light surfaces, warm off-white */
+  --color-ink: #080808; /* primary bg — near-pure black */
+  --color-ink-soft: #101010; /* faint separation */
+  --color-coal: #161616; /* raised surfaces */
+  /* legacy "plum/plum-soft" names kept but recolored NEUTRAL (no purple) so
+     existing border/surface utilities stay valid. */
+  --color-plum: #242424; /* neutral border / hairline surface */
+  --color-plum-soft: #6c6c6c; /* muted grey text */
+  --color-rose: #ff5d4b; /* THE accent — a hot ember red-orange, used sparingly */
+  --color-bone: #ededea; /* primary text, near-white with a hair of warmth */
 
-  --font-display: var(--font-display), Georgia, serif;
+  --font-display: var(--font-display), "Arial Narrow", sans-serif;
   --font-sans: var(--font-sans), system-ui, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, monospace;
 }
 
-/* Default + only mode is dark. The brand lives at night. */
 html {
   background: var(--color-ink);
   color-scheme: dark;
@@ -27,15 +29,13 @@ html {
 body {
   background: var(--color-ink);
   color: var(--color-bone);
-  font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.7;
+  font-family: var(--font-mono); /* mono body — terminal/zine, not the AI sans */
+  font-size: 15px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
-/* When Lenis is active it drives scroll; keep native smooth off to avoid fights. */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -52,43 +52,74 @@ html.lenis body {
   color: var(--color-ink);
 }
 
-/* Slim, on-brand scrollbar (desktop). */
 ::-webkit-scrollbar {
-  width: 9px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
   background: var(--color-ink);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-plum);
-  border-radius: 99px;
+  background: #2a2a2a;
 }
 
-/* Display type wants tight, intentional tracking. */
+/* Display = heavy condensed grotesque, set BIG and uppercase. Brutal, poster-y. */
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
-  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.82;
+  font-weight: 400;
 }
 
-/* Tiny mono kicker/label idiom. */
+/* Reading body (the reader's long text) wants a warmer humanist sans, not mono. */
+.font-read {
+  font-family: var(--font-sans);
+}
+
+/* Mono micro-label idiom. */
 .kicker {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-plum-soft);
 }
 
-/* Film-grain overlay texture (applied by <Grain />). */
+/* Hard clip-wipe reveal — replaces the AI fade-up. Element is masked and
+   unmasked from the bottom edge; paired with the .is-in class toggled by IO. */
+.wipe {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.7s cubic-bezier(0.7, 0, 0.2, 1);
+  will-change: clip-path;
+}
+.wipe.is-in {
+  clip-path: inset(0 0 -2% 0);
+}
+
+/* Heavier grain — zine print texture. */
 .grain {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 90;
-  opacity: 0.05;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.09;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Hairline divider used as a structural motif (table-of-contents look). */
+.rule {
+  height: 1px;
+  background: var(--color-plum);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -99,5 +130,8 @@ html.lenis body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .wipe {
+    clip-path: none !important;
   }
 }

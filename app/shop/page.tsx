@@ -14,7 +14,7 @@ export default function ShopPage() {
         <h1 className="font-display text-[clamp(2.6rem,8vw,6rem)] leading-[0.95]">
           Everything we&apos;ve been
           <br />
-          up <span className="italic text-rose">late</span> writing.
+          up <span className="text-rose">late</span> writing.
         </h1>
         <p className="mt-6 text-lg text-bone/60">
           Small books for specific nights. Pick the one that matches where you

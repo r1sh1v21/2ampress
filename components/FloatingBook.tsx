@@ -135,8 +135,8 @@ export default function FloatingBook({
               width: depth,
               transform: `rotateY(-90deg) translateZ(${depth / 2}px)`,
               transformOrigin: "left center",
-              background: `linear-gradient(${book.cover.base}, #161019)`,
-              boxShadow: "inset -6px 0 10px rgba(0,0,0,0.5)",
+              background: `linear-gradient(${book.cover.base}, #000)`,
+              boxShadow: "inset -6px 0 10px rgba(0,0,0,0.6)",
             }}
           />
           {/* front cover face */}
